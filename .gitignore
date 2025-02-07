@@ -1,0 +1,55 @@
+# Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.db
+*.sqlite3
+
+# Environment files
+.env
+venv/
+env/
+*.env
+
+# IDEs and editors
+.idea/
+.vscode/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Python distributions
+*.egg
+*.egg-info
+dist/
+build/
+
+# Temporary files
+*.log
+*.bak
+*.swp
+*.swo
+*.tmp
+
+# Test results
+.coverage
+nosetests.xml
+pytest.xml
+coverage.xml
+
+# Virtual Environment folder
+venv/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# mypy
+.mypy_cache/
+
+# VS Code settings folder
+.vscode/
+
+# Other
+*.pot
