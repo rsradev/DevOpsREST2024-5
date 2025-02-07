@@ -1,0 +1,17 @@
+name: Build and Push Docker Image
+
+# Trigger the workflow on push to the main branch or PR targeting the main branch
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build and push
+        run: |
+          docker login --username killer86 --password ${{ secrets.GH_PAT}}
+          docker build . -t ghcr.io/rsradev/devopsrest2024-2025:latest
+          docker push ghcr.io/rsradev/devopsrest2024-2025:latest
