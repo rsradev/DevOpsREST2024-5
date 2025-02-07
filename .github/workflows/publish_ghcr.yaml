@@ -45,9 +45,9 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t ghcr.io/devopsrest2024-2025/devopsrest2024-2025:latest .
+          docker build -t ghcr.io/${{ github.actor }}/devopsrest2024-2025/devopsrest2024-2025:latest .
 
       - name: Push Docker Image
         if: github.ref == 'refs/heads/main'  # Only push on main branch
         run: |
-          docker push ghcr.io/devopsrest2024-2025/devopsrest2024-2025
+          docker push ghcr.io/${{ github.actor }}/devopsrest2024-2025/devopsrest2024-2025
