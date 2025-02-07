@@ -1,0 +1,63 @@
+- name: Install Docker and Deploy FastAPI App
+  hosts: all
+  become: yes  # Run tasks with sudo privileges
+
+  tasks:
+    - name: Install required system packages
+      apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: present
+        update_cache: yes
+
+    - name: Add Docker GPG key
+      shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+
+    - name: Add Docker repository
+      shell: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+    - name: Install Docker
+      apt:
+        name: docker-ce
+        state: present
+        update_cache: yes
+
+    - name: Start and enable Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Pull FastAPI container image (if exists)
+      docker_image:
+        name: devopsrest2024-2025
+        source: pull
+      ignore_errors: yes  # Ignore errors if the image doesn't exist
+
+    - name: Remove existing FastAPI container (if exists)
+      docker_container:
+        name: devopsrest2024-2025
+        state: absent
+      ignore_errors: yes
+
+    - name: Run FastAPI container
+      docker_container:
+        name: rest2024-2025
+        image: devopsrest2024-2025
+        state: started
+        restart_policy: always
+        published_ports:
+          - "80:80"
+        env_file: "/path/to/project/.env"
+
+    - name: Verify FastAPI container is running
+      shell: docker ps | grep fastapi_container
+      register: container_status
+      changed_when: false
+
+    - name: Debug container status
+      debug:
+        msg: "{{ container_status.stdout }}"
