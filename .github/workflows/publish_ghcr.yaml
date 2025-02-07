@@ -3,8 +3,7 @@ name: Build and Push Docker Image
 # Trigger the workflow on push to the main branch or PR targeting the main branch
 on:
   push:
-    branches:
-      - main
+
 jobs:
   build_and_publish:
     runs-on: ubuntu-latest
