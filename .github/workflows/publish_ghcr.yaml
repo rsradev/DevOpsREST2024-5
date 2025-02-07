@@ -38,7 +38,7 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
+          username: killer86
           password: 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
 
       - name: Build Docker Image
